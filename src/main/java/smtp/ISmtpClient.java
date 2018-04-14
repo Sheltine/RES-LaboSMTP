@@ -8,7 +8,7 @@ public interface ISmtpClient {
 
     public final static int DEFAULT_PORT = 2525;
 
-    public static final String EHLO_CMD    = "EHLO";
+    public static final String EHLO_CMD    = "EHLO ";
     public static final String FROM_CMD    = "MAIL FROM: ";
     public static final String TO_CMD      = "RCPT TO: ";
     public static final String DATA_CMD    = "DATA";
@@ -20,7 +20,7 @@ public interface ISmtpClient {
     public static final String RSP_ERROR   = "500 Error: bad syntax";
 
 
-    public void connect(String server, int port) throws IOException;
+    public void connect(String server) throws IOException;
     public void disconnect() throws IOException;
     public void sendMail(Mail mail) throws IOException;
 }

@@ -1,10 +1,20 @@
 package model.mail;
 
+import java.util.List;
+
 public class Mail {
     private String body;
     private String subject;
     private String from;
-    private String to;
+    private List<String> to;
+
+
+    public Mail(String from, List<String> to, String subject, String body){
+        this.from = from;
+        this.to = to;
+        this.subject = subject;
+        this.body = body;
+    }
 
     public String getBody() {
         return body;
@@ -30,16 +40,15 @@ public class Mail {
         this.from = from;
     }
 
-    public String getTo() {
+    public List<String> getTo() {
         return to;
     }
 
-    public void setTo(String to) {
+    public void setTo(List<String> to) {
         this.to = to;
     }
 
-
     public String toString(){
-        return ("From: " + getFrom() + "\nTo: " + getTo() + "\nSubject: " + getSubject() + "\n\n" + getBody());
+        return ("From: " + getFrom() + "\nTo: " + getTo() + "\nSubject: " + getSubject() + "\r\n\r\n" + getBody());
     }
 }

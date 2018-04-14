@@ -17,14 +17,19 @@ public class SmtpClient implements ISmtpClient {
     protected PrintWriter os;
     protected Socket socket;
 
-    public void connect(String server, int port) throws IOException {
-        socket = new Socket(server, port);
+
+    public void connect(String server) throws IOException {
+        socket = new Socket(server, DEFAULT_PORT);
         is = new BufferedReader( new InputStreamReader( socket.getInputStream() ) );
         os = new PrintWriter( socket.getOutputStream() );
 
-        LOG.info("Connected to server " + server + " on port " + port + "." );
-        is.readLine();
-
+        LOG.info("Connected to server " + server + " on port " + DEFAULT_PORT + "." );
+        String response;
+        while((!((response = is.readLine()).substring(0,3)).equals("220"))){
+            LOG.info(response);
+        }
+        LOG.info(response);
+        LOG.info("CONNECTED");
     }
 
     public void disconnect() throws IOException {
@@ -35,31 +40,45 @@ public class SmtpClient implements ISmtpClient {
     }
 
     public void sendMail(Mail mail) throws IOException {
-        os.println(EHLO_CMD);
+
+        os.print(EHLO_CMD + "johanna\r\n");
+        LOG.info(EHLO_CMD + "johanna");
         os.flush();
-        String response;
-        while((response=is.readLine()) != null){
+        String response = is.readLine();
+       // System.out.println("coucou");
+
+        while(!response.substring(0,6).equals(RSP_OK) ){
+            response = is.readLine();
             LOG.info(response);
         }
+        //System.out.println("thisis : " + is.readLine());
 
-        os.println(FROM_CMD + mail.getFrom());
+        //System.out.println("coucou2");
+
+        os.print(FROM_CMD + mail.getFrom() + "\r\n");
+        LOG.info(FROM_CMD + mail.getFrom());
         os.flush();
 
         checkBadResponse(RSP_OK);
 
-        os.println(TO_CMD + mail.getTo());
+
+        for(String to : mail.getTo()){
+            os.print(TO_CMD + to + "\r\n");
+            os.flush();
+            checkBadResponse(RSP_OK);
+        }
+
+        os.print(DATA_CMD + "\r\n");
+        os.flush();
+        LOG.info(is.readLine()  );
+        os.print(mail.toString() + "\r\n");
+        os.flush();
+        os.print(ENDMAIL_CMD + "\r\n");
         os.flush();
 
         checkBadResponse(RSP_OK);
 
-        os.println(DATA_CMD + mail.toString());
-        os.flush();
-        os.println(ENDMAIL_CMD);
-        os.flush();
-
-        checkBadResponse(RSP_OK);
-
-        os.println(QUIT_CMD);
+        os.print(QUIT_CMD + "\r\n");
         os.flush();
 
         checkBadResponse(RSP_BYE);
@@ -67,9 +86,11 @@ public class SmtpClient implements ISmtpClient {
     }
 
     private void checkBadResponse(String expected) throws IOException{
-        if(!is.readLine().equals(expected)){
+        String rep;
+        if(!(rep = is.readLine()).equals(expected)) {
             throw new InvalidDataException("Invalid data provided");
         }
+        System.out.println(rep);
     }
 
 }
