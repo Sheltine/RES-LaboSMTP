@@ -5,4 +5,12 @@ public class Person {
     public Person(String emailAdress) {
         this.emailAdress = emailAdress;
     }
+
+    public String getEmailAdress() {
+        return emailAdress;
+    }
+
+    public void setEmailAdress(String emailAdress) {
+        this.emailAdress = emailAdress;
+    }
 }

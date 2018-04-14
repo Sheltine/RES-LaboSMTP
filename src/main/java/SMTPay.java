@@ -1,5 +1,6 @@
 import com.sun.security.ntlm.Client;
 import model.mail.Mail;
+import model.mail.Person;
 import smtp.SmtpClient;
 
 import java.io.IOException;
@@ -8,11 +9,15 @@ import java.util.List;
 
 public class SMTPay {
     public static void main(String[] args) {
+        Person p1 = new Person("johannamelly@gmail.com");
+        Person p2 = new Person("adresserandom@tamere.fr");
+        Person p3 = new Person("johanna.melly@heig-vd.ch");
 
-        List<String> tos = new ArrayList<String>();
-        tos.add("johannamelly@gmail.com");
-        tos.add("adresserandom@tamere.fr");
-        Mail newMail = new Mail("johanna.melly@heig-vd.ch", tos, "Test, test", "Ceci est un test. J'aime le pain");
+        List<Person> tos = new ArrayList<Person>();
+        tos.add(p1);
+        tos.add(p2);
+
+        Mail newMail = new Mail(p3, tos, "Test, test", "Ceci est un test. J'aime le pain");
 
         SmtpClient client = new SmtpClient();
         try{

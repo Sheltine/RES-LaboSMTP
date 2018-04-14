@@ -5,11 +5,11 @@ import java.util.List;
 public class Mail {
     private String body;
     private String subject;
-    private String from;
-    private List<String> to;
+    private Person from;
+    private List<Person> to;
 
 
-    public Mail(String from, List<String> to, String subject, String body){
+    public Mail(Person from, List<Person> to, String subject, String body){
         this.from = from;
         this.to = to;
         this.subject = subject;
@@ -32,28 +32,28 @@ public class Mail {
         this.subject = subject;
     }
 
-    public String getFrom() {
+    public Person getFrom() {
         return from;
     }
 
-    public void setFrom(String from) {
+    public void setFrom(Person from) {
         this.from = from;
     }
 
-    public List<String> getTo() {
+    public List<Person> getTo() {
         return to;
     }
 
-    public void setTo(List<String> to) {
+    public void setTo(List<Person> to) {
         this.to = to;
     }
 
     public String toString(){
         String tos = "";
-        for(String address : getTo()){
-            tos += address + ", ";
+        for(Person address : getTo()){
+            tos += address.getEmailAdress() + ", ";
         }
         tos = tos.substring(0, tos.length()-2);
-        return ("From: " + getFrom() + "\nTo: " + tos + "\nSubject: " + getSubject() + "\r\n\r\n" + getBody());
+        return ("From: " + getFrom().getEmailAdress() + "\nTo: " + tos + "\nSubject: " + getSubject() + "\r\n\r\n" + getBody());
     }
 }
