@@ -11,6 +11,7 @@ public class SMTPay {
 
         List<String> tos = new ArrayList<String>();
         tos.add("johannamelly@gmail.com");
+        tos.add("adresserandom@tamere.fr");
         Mail newMail = new Mail("johanna.melly@heig-vd.ch", tos, "Test, test", "Ceci est un test. J'aime le pain");
 
         SmtpClient client = new SmtpClient();

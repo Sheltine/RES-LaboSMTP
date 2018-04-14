@@ -17,7 +17,11 @@ public class SmtpClient implements ISmtpClient {
     protected PrintWriter os;
     protected Socket socket;
 
-
+    /**
+     * Connect to server
+     * @param server
+     * @throws IOException
+     */
     public void connect(String server) throws IOException {
         socket = new Socket(server, DEFAULT_PORT);
         is = new BufferedReader( new InputStreamReader( socket.getInputStream() ) );
@@ -32,6 +36,10 @@ public class SmtpClient implements ISmtpClient {
         LOG.info("CONNECTED");
     }
 
+    /**
+     * Disconnect from server
+     * @throws IOException
+     */
     public void disconnect() throws IOException {
         is.close();
         os.close();
@@ -39,45 +47,57 @@ public class SmtpClient implements ISmtpClient {
         LOG.info("Disconnected from server.");
     }
 
+    /**
+     * Sends a mail to server
+     * @param mail to send
+     * @throws IOException
+     */
     public void sendMail(Mail mail) throws IOException {
 
+        // Notifying the server that we want to send an email
         os.print(EHLO_CMD + "johanna\r\n");
         LOG.info(EHLO_CMD + "johanna");
         os.flush();
-        String response = is.readLine();
-       // System.out.println("coucou");
 
+        String response = is.readLine();
+
+        // Getting server response
         while(!response.substring(0,6).equals(RSP_OK) ){
             response = is.readLine();
             LOG.info(response);
         }
-        //System.out.println("thisis : " + is.readLine());
 
-        //System.out.println("coucou2");
-
+        // Sending email writer
         os.print(FROM_CMD + mail.getFrom() + "\r\n");
         LOG.info(FROM_CMD + mail.getFrom());
         os.flush();
 
         checkBadResponse(RSP_OK);
 
-
+        // Sending email recipients one by one
         for(String to : mail.getTo()){
+            System.out.println(to);
             os.print(TO_CMD + to + "\r\n");
             os.flush();
             checkBadResponse(RSP_OK);
         }
 
+        // Notifying the server we'll be sending mail data
         os.print(DATA_CMD + "\r\n");
         os.flush();
         LOG.info(is.readLine()  );
+
+        // Sending mail header and body
         os.print(mail.toString() + "\r\n");
         os.flush();
+
+        // Notifying the server we finished sending data
         os.print(ENDMAIL_CMD + "\r\n");
         os.flush();
 
         checkBadResponse(RSP_OK);
 
+        // Quitting
         os.print(QUIT_CMD + "\r\n");
         os.flush();
 
@@ -85,6 +105,11 @@ public class SmtpClient implements ISmtpClient {
 
     }
 
+    /**
+     * Checks if server response is as expected
+     * @param expected
+     * @throws IOException
+     */
     private void checkBadResponse(String expected) throws IOException{
         String rep;
         if(!(rep = is.readLine()).equals(expected)) {

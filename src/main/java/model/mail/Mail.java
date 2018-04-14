@@ -49,6 +49,11 @@ public class Mail {
     }
 
     public String toString(){
-        return ("From: " + getFrom() + "\nTo: " + getTo() + "\nSubject: " + getSubject() + "\r\n\r\n" + getBody());
+        String tos = "";
+        for(String address : getTo()){
+            tos += address + ", ";
+        }
+        tos = tos.substring(0, tos.length()-2);
+        return ("From: " + getFrom() + "\nTo: " + tos + "\nSubject: " + getSubject() + "\r\n\r\n" + getBody());
     }
 }
