@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public interface ISmtpClient {
 
-    public final static int DEFAULT_PORT = 2525;
+    public final static int DEFAULT_PORT = 25;
 
     public static final String EHLO_CMD    = "EHLO ";
     public static final String FROM_CMD    = "MAIL FROM: ";

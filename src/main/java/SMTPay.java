@@ -16,7 +16,7 @@ public class SMTPay {
         SmtpClient client = new SmtpClient();
         try{
             System.out.println("Connexion...");
-            client.connect("localhost");
+            client.connect("172.17.0.2");
             System.out.println("Envoi du mail...");
             client.sendMail(newMail);
             System.out.println("Déconnexion...");

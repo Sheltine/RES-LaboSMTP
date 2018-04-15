@@ -1,35 +1,37 @@
 package model.mail;
 
+import data.MailCorpus;
+
 import java.util.List;
 
 public class Mail {
-    private String body;
     private String subject;
+    private MailCorpus body;
     private String from;
     private List<String> to;
 
 
-    public Mail(String from, List<String> to, String subject, String body){
+    public Mail(String from, List<String> to, String body, String subject){
         this.from = from;
         this.to = to;
+        this.body = new MailCorpus(body);
         this.subject = subject;
-        this.body = body;
     }
 
     public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public String getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    public void setBody(String subject) {
         this.subject = subject;
+    }
+
+    public MailCorpus getSubject() {
+        return body;
+    }
+
+    public void setSubject(String body) {
+        this.body = new MailCorpus(body);
     }
 
     public String getFrom() {
