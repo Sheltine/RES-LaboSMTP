@@ -48,5 +48,6 @@ public class Prank {
 
     public void setReceivers(List<Victim> receivers) {
         this.receivers = receivers;
+
     }
 }

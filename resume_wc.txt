@@ -1,0 +1,38 @@
+fichier config
+fichier liste victime
+fichier des messages à envoyer (marquer == pour séparer à choix)
+possibilité de faire une interface utilisateur
+
+1. On veut obtenir des données de config et les lire
+Si on stocke dans des fichiers c'est tranquillou. on a un .properties, c'est particulier en java y'a des classes pour le parsing
+
+2. implémetnation du protocole smtp
+écrire client tcp, avec flux entrée et sortie
+même principe que d'hab avec synthaxe du protocole SMTP
+
+3. préparer les messages (mieux vaut commencer par ça) -> O.O.
+On part de la données, terme qui apparaissent et décider des classes et interfaces.
+- Prank
+- Group (list person)
+- Person
+- Mail (from, to, subject, body)
+- PrankGenerator (pour un groupe de personne, lié à un nessage) -> produire obj mil et donner au serv smtp. Point de départ, resp de récup la liste, a un configManager
+Dans l'IDE, ébauches de classe java
+
+-smtpClient
+void sendMail (Mail mail)
+
+LUI:
+il a un mailrobot.java
+packages
+- config
+	config manager + interface
+- model
+	Gourpe
+	message
+	Person
+	Prank
+	PrankGenerator (règles de func req (genre tant de personnes par groupe max)
+- smtp
+ classe smtpClient implém interface (envoue un message, impl du protocole smtp)
+
