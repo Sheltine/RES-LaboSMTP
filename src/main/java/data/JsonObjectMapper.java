@@ -57,6 +57,7 @@ public class JsonObjectMapper {
      *
      * https://stackoverflow.com/questions/6349421/how-to-use-jackson-to-deserialise-an-array-of-objects#6349488
      */
+    @SuppressWarnings("unchecked")
     public static <T> List<T> parseJsonArray(String json, Class<T> type) throws IOException, ClassNotFoundException {
         ObjectMapper mapper = new ObjectMapper();
         Class<T[]> arrayClass = (Class<T[]>) Class.forName("[L" + type.getName() + ";");

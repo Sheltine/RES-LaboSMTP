@@ -34,5 +34,16 @@ public class VictimsListTest {
 
     }
 
+    @Test
+    public void iSBPToSave2() throws Exception {
+        VictimsList vl1 = new VictimsList("listedevictimes.txt");
+
+        vl1.save();
+        vl1.close();
+        System.out.println( vl1.getVictims());
+        Assert.assertEquals(DATA, vl1.getVictims());
+
+    }
+
 
 }

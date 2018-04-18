@@ -14,6 +14,7 @@ public class Prank {
     public Prank(Mail m, List<Victim> v){
         mail = m;
         sender = v.get(0);
+        // ne faut-il pas remove avant?
         receivers = new ArrayList<Victim>(v);
         receivers.remove(0);
     }
