@@ -5,6 +5,8 @@ import model.mail.Mail;
 import model.prank.PrankGenerator;
 import smtp.SmtpClient;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,8 @@ public class Main {
 
     public static void main(String[] args) {
         SmtpClient client = new SmtpClient();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         try {
             LOG.info("Application Start");
 
@@ -25,9 +29,13 @@ public class Main {
             client.connect("smtp.heig-vd.ch");
             PrankGenerator prankGen = new PrankGenerator();
             List<Mail> pranks = prankGen.generate();
-            //WANNA SEND ?
-            for(Mail prank : pranks){
-                client.sendMail(prank);
+            System.out.println("Do you want to send these pranks? (Y / any key)");
+            if(br.readLine().equals("Y")){
+                for(Mail prank : pranks){
+                    client.sendMail(prank);
+                }
+            }else{
+                System.out.println("Bye then!");
             }
 
             client.disconnect();

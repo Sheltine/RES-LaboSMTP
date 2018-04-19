@@ -50,7 +50,7 @@ public class PrankGenerator {
         boolean goodInput;
         String line;
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.print("Welcome in our generator of pranks. First, select");
+        System.out.println("Welcome in our generator of pranks. First, select");
 
         System.out.println("Do you want to provide a victim list? (Y/N)");
 
@@ -76,7 +76,7 @@ public class PrankGenerator {
         }
 
         System.out.println("Thank you.");
-        System.out.println("Do you want to provide a mail corpus?");
+        System.out.println("Do you want to provide a mail corpus file? (Y/N)");
 
         do{
 
@@ -119,9 +119,13 @@ public class PrankGenerator {
         System.out.println("Now we successfully created " + groupsNumber + " groups with the information you provided.");
 
         for(Group group : groupList){
+            Random random = new Random();
+            int randomNumber = random.nextInt(mcList.getMailCorpuses().size());
+            MailCorpus mc = mcList.getMailCorpuses().get(randomNumber);
             System.out.println("What subject do you want for this prank?");
+            System.out.println(mc.getMailCorpus());
             line = br.readLine();
-            pranks.add(createPrank(group, line));
+            pranks.add(createPrank(group, line, mc));
         }
 
         System.out.println("Good. All you pranks have been successfully created. Do you want to list them? (Y/N)");
@@ -142,7 +146,7 @@ public class PrankGenerator {
             return pranks;
         }else{
             for(Mail prank : pranks){
-                System.out.println(prank);
+                System.out.println(prank + "\n\n");
             }
         }
 
@@ -162,10 +166,8 @@ public class PrankGenerator {
         }
     }
 
-    private Mail createPrank(Group group, String subject){
-        Random random = new Random();
-        int randomNumber = random.nextInt(mcList.getMailCorpuses().size());
-        MailCorpus mc = mcList.getMailCorpuses().get(randomNumber);
+    private Mail createPrank(Group group, String subject, MailCorpus mc){
+
         return new Mail(group.getSender(), victimsList.getVictims(), subject, mc);
     }
 
