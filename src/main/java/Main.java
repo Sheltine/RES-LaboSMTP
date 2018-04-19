@@ -21,6 +21,8 @@ public class Main {
             VictimsList vL;
 
 
+            PrankGenerator prankGen = new PrankGenerator();
+            prankGen.generate();
            // PrankGenerator pg = new PrankGenerator();
           //  pg.generate();
 

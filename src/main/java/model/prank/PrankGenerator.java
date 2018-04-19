@@ -20,11 +20,12 @@ public class PrankGenerator {
 
     private List<Prank> pranks;
 
-    public PrankGenerator(String filenameVictims, String filenameMailCorpuses) {
+    public PrankGenerator(String filenameVictims, String filenameMailCorpuses) throws IllegalArgumentException{
         victimsList = new VictimsList( filenameVictims );
+        if(victimsList.getVictims().size() < 3){
+            throw new IllegalArgumentException("Not enough people in your victim list!");
+        }
         mcList = new MailCorpusList( filenameMailCorpuses );
-
-
 
     }
     public PrankGenerator() {
