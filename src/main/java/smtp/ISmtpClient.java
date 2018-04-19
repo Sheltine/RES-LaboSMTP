@@ -15,7 +15,10 @@ public interface ISmtpClient {
     public static final String ENDMAIL_CMD = ".";
     public static final String QUIT_CMD    = "quit";
 
-    public static final String RSP_OK      = "250 Ok";
+    public static final String RSP_OK      = "250 ";
+    public static final String RSP_XRDST   = "250 XRDST";
+
+
     public static final String RSP_BYE     = "221 Bye";
     public static final String RSP_ERROR   = "500 Error: bad syntax";
 

@@ -21,7 +21,8 @@ public class Main {
             LOG.info("Application Start");
 
            // List<String> x = new ArrayList<>(Arrays.asList("xyz", "abc"));
-            client.connect("172.17.0.2");
+           // client.connect("172.17.0.2");
+            client.connect("smtp.heig-vd.ch");
             PrankGenerator prankGen = new PrankGenerator();
             List<Mail> pranks = prankGen.generate();
             //WANNA SEND ?

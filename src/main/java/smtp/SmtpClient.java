@@ -57,15 +57,16 @@ public class SmtpClient implements ISmtpClient {
     public void sendMail(Mail mail) throws IOException {
 
         // Notifying the server that we want to send an email
-        os.print(EHLO_CMD + "johanna\r\n");
-        LOG.info(EHLO_CMD + "johanna");
+        os.print(EHLO_CMD + "hacker" + "\r\n");
+        LOG.info(EHLO_CMD +  "hacker");
         os.flush();
 
         String response = is.readLine();
 
         // Getting server response
-        while(!response.substring(0,6).equals(RSP_OK) ){
+        while( !(response.substring(0,4).equals(RSP_OK) ) ){
             response = is.readLine();
+            int l = response.length();
             LOG.info(response);
         }
 
@@ -100,10 +101,10 @@ public class SmtpClient implements ISmtpClient {
         checkBadResponse(RSP_OK);
 
         // Quitting
-        os.print(QUIT_CMD + "\r\n");
-        os.flush();
+      //  os.print(QUIT_CMD + "\r\n");
+      //  os.flush();
 
-        checkBadResponse(RSP_BYE);
+      //  checkBadResponse(RSP_BYE);
 
     }
 
@@ -114,7 +115,9 @@ public class SmtpClient implements ISmtpClient {
      */
     private void checkBadResponse(String expected) throws IOException{
         String rep;
-        if(!(rep = is.readLine()).equals(expected)) {
+        //TODO BETTER
+        if(!(rep = is.readLine()).substring(0,4).equals(expected)) {
+            System.out.println(rep);
             throw new InvalidDataException("Invalid data provided");
         }
         System.out.println(rep);
