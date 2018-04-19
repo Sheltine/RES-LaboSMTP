@@ -19,6 +19,17 @@ public class MailCorpusTest {
         mailCorpusList.save();
         mailCorpusList.close();
         MailCorpus identicalContent = mailCorpusList.getMailCorpuses().get(0);
-        Assert.assertEquals(mailCorpus, identicalContent);
+        Assert.assertEquals(mailCorpus.getMailCorpus(), identicalContent.getMailCorpus());
+    }
+
+    @Test
+    public void shouldBeAbleToGenerateJsonRepresentation() throws IOException {
+        MailCorpusList mailCorpusList = new MailCorpusList();
+        mailCorpusList.add(mailCorpus);
+        mailCorpusList.save();
+        mailCorpusList.close();
+
+        Assert.assertEquals(mailCorpus, mailCorpusList.getMailCorpuses().get(0));
+
     }
 }

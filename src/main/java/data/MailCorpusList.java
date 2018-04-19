@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ public class MailCorpusList {
 
     public MailCorpusList(String filename){
 
+        mailCorpuses = new ArrayList<MailCorpus>();
         try {
             File f = new File( filename);
             f.createNewFile();
@@ -35,7 +37,8 @@ public class MailCorpusList {
             /* https://stackoverflow.com/questions/28977308/read-all-lines-with-bufferedreader
              *
              */
-            mailCorpuses = JsonObjectMapper.parseJsonArray( reader.lines().collect(Collectors.joining()),  MailCorpus.class );
+            if(f.length() != 0)
+                mailCorpuses = JsonObjectMapper.parseJsonArray( reader.lines().collect(Collectors.joining()),  MailCorpus.class );
 
 
 
@@ -68,7 +71,6 @@ public class MailCorpusList {
     }
 
     public void add(MailCorpus mc){
-
         mailCorpuses.add(mc);
     }
 

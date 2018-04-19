@@ -16,12 +16,15 @@ public class VictimsList {
     protected static final Logger LOG = Logger.getLogger(VictimsList.class.getName());
 
     private static final String FILENAME_DEFAULT = "victimes.txt";
-    private List<Victim> victims = new ArrayList<>();
+    private List<Victim> victims;
     private BufferedReader reader;
     private PrintWriter writer;
 
 
     public VictimsList(String filename){
+
+        victims = new ArrayList<>();
+
         try {
 
             File f = new File( filename);

@@ -8,6 +8,7 @@ import model.mail.Mail;
  * Used in MailCorpusList
  */
 public class MailCorpus {
+
     private String mailCorpus;
 
     public MailCorpus(){};

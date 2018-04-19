@@ -22,7 +22,7 @@ public class PrankTest {
     @Test
     public void weShouldBeAbleToCreateAPrankGenerator() {
         //List<Victim> victims = new ArrayList<>(Arrays.asList(new Victim("Jessica"), new Victim("Sandrine")));
-        VictimsList victimsList = new VictimsList("twoVictimsFile.json");;
-        PrankGenerator PG = new PrankGenerator("twoVictimsFile.json", "MailCorpuses.txt");
+        VictimsList victimsList = new VictimsList("threeVictimsFile.json");;
+        PrankGenerator PG = new PrankGenerator("threeVictimsFile.json", "MailCorpuses.txt");
     }
 }
