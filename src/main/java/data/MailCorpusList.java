@@ -37,9 +37,11 @@ public class MailCorpusList {
             /* https://stackoverflow.com/questions/28977308/read-all-lines-with-bufferedreader
              *
              */
-            if(f.length() != 0)
-                mailCorpuses = JsonObjectMapper.parseJsonArray( reader.lines().collect(Collectors.joining()),  MailCorpus.class );
-
+            if(f.length() != 0) {
+                String lines = reader.lines().collect(Collectors.joining());
+                mailCorpuses = JsonObjectMapper.parseJsonArray(lines, MailCorpus.class);
+               // mailCorpuses = JsonObjectMapper.parseJsonArray(reader.lines().collect(Collectors.joining()), MailCorpus.class);
+            }
 
 
         }catch(Exception e){
@@ -81,8 +83,12 @@ public class MailCorpusList {
 
     public void save() {
         try {
-            writer.println(JsonObjectMapper.toJson(this));
+            writer.println(JsonObjectMapper.toJson(this.getMailCorpuses()));
             writer.flush();
+
+            System.out.println("Saved!");
+            System.out.println("Reading content: " + reader.lines().collect(Collectors.joining()));
+
         }catch(JsonProcessingException e){
             LOG.severe(e.getMessage());
         }

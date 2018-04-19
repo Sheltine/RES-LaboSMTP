@@ -19,10 +19,12 @@ public class Main {
         SmtpClient client = new SmtpClient();
         try {
             LOG.info("Application Start");
-            client.connect("localhost");
+
+           // List<String> x = new ArrayList<>(Arrays.asList("xyz", "abc"));
+            client.connect("172.17.0.2");
             PrankGenerator prankGen = new PrankGenerator();
             List<Mail> pranks = prankGen.generate();
-
+            //WANNA SEND ?
             for(Mail prank : pranks){
                 client.sendMail(prank);
             }

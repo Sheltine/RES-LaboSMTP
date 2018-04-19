@@ -26,10 +26,24 @@ public class MailCorpusTest {
     public void shouldBeAbleToGenerateJsonRepresentation() throws IOException {
         MailCorpusList mailCorpusList = new MailCorpusList();
         mailCorpusList.add(mailCorpus);
+        mailCorpusList.add(mailCorpus);
+
         mailCorpusList.save();
         mailCorpusList.close();
 
         Assert.assertEquals(mailCorpus, mailCorpusList.getMailCorpuses().get(0));
+
+    }
+
+    @Test
+    public void shouldDeserialize() throws IOException {
+        MailCorpusList mailCorpusList = new MailCorpusList("mailCorpus.json");
+        mailCorpusList.save();
+        mailCorpusList.close();
+
+
+        MailCorpus identicalContent = mailCorpusList.getMailCorpuses().get(0);
+        Assert.assertEquals("J'aime le pain.", identicalContent.getMailCorpus());
 
     }
 }

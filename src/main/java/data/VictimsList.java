@@ -38,10 +38,11 @@ public class VictimsList {
             /* https://stackoverflow.com/questions/28977308/read-all-lines-with-bufferedreader
              *
              */
-       //     if(!newFile)
-            String lines =reader.lines().collect(Collectors.joining());
-            victims = JsonObjectMapper.parseJsonArray(lines, Victim.class );
-            //System.out.println("mail: " + victims.get(0).getMail());
+            if(f.length() != 0) {
+                String lines = reader.lines().collect(Collectors.joining());
+                victims = JsonObjectMapper.parseJsonArray(lines, Victim.class);
+                //System.out.println("mail: " + victims.get(0).getMail());
+            }
 
         }catch(Exception e){
             LOG.log(Level.SEVERE, "Exception; ", e );
@@ -79,7 +80,7 @@ public class VictimsList {
 
         try {
             System.out.println("Saving...");
-            writer.println(JsonObjectMapper.toJson(this));
+            writer.println(JsonObjectMapper.toJson(this.getVictims()));
             writer.flush();
             System.out.println("Saved!");
             System.out.println("Reading content: " + reader.lines().collect(Collectors.joining()));

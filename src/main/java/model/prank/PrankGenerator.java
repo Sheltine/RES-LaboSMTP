@@ -39,7 +39,10 @@ public class PrankGenerator {
     }
     */
 
-    public PrankGenerator() {}
+    public PrankGenerator() {
+        groupList = new ArrayList<Group>();
+        pranks = new ArrayList<Mail>();
+    }
 
 
     public List<Mail> generate() throws IOException {
@@ -109,6 +112,7 @@ public class PrankGenerator {
                 System.out.print("Please try again: ");
             }
         } while (!goodInput);
+
 
         createGroups();
 
