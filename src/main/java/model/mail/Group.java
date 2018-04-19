@@ -21,7 +21,12 @@ public class Group {
     public Group(VictimsList victims, Victim sender){
         this.victims = victims;
         this.sender = sender;
-       // this.victims.getVictims().remove(sender);
+        //System.out.println(victims.getVictims().size());
+        /*
+        if(this.victims.getVictims().contains(sender)){
+            this.victims.getVictims().remove(sender);
+        }
+        */
     }
 
     public Group(VictimsList victims){

@@ -42,6 +42,8 @@ public class VictimsList {
                 String lines = reader.lines().collect(Collectors.joining());
                 victims = JsonObjectMapper.parseJsonArray(lines, Victim.class);
                 //System.out.println("mail: " + victims.get(0).getMail());
+            }else{
+                victims = createFakeVictimsList();
             }
 
         }catch(Exception e){
@@ -62,6 +64,13 @@ public class VictimsList {
         add( victim );
     }
 
+    private List<Victim> createFakeVictimsList(){
+        List<Victim> victims = new ArrayList<>();
+        victims.add(new Victim("johanna.melly@heig-vd.ch"));
+        victims.add(new Victim("yohann.meyer@heig-vd.ch"));
+        victims.add(new Victim("johannamelly@gmail.com"));
+        return victims;
+    }
     public List<Victim> getVictims() {
         return victims;
     }

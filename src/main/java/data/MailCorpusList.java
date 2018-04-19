@@ -2,6 +2,7 @@ package data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import model.mail.Mail;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -41,6 +42,8 @@ public class MailCorpusList {
                 String lines = reader.lines().collect(Collectors.joining());
                 mailCorpuses = JsonObjectMapper.parseJsonArray(lines, MailCorpus.class);
                // mailCorpuses = JsonObjectMapper.parseJsonArray(reader.lines().collect(Collectors.joining()), MailCorpus.class);
+            }else{
+                mailCorpuses = createFakeMailCorpuses();
             }
 
 
@@ -62,6 +65,14 @@ public class MailCorpusList {
     public MailCorpusList(MailCorpus mailCorpus){
         this() ;
         add( mailCorpus );
+    }
+
+    private List<MailCorpus> createFakeMailCorpuses(){
+        List<MailCorpus> mails = new ArrayList<>();
+        mails.add(new MailCorpus("Bonjour,\n\n Ce mail est extremement realiste et convaincant."));
+        mails.add(new MailCorpus("Ne prenez jamais le fenouil par son cote sporadique."));
+
+        return mails;
     }
 
     public List<MailCorpus> getMailCorpuses() {
