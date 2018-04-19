@@ -16,7 +16,7 @@ public class SMTPay {
         List<Person> tos = new ArrayList<Person>();
         tos.add(p1);
         tos.add(p2);
-
+/*
         Mail newMail = new Mail(p3, tos, "Test, test", "Ceci est un test. J'aime le pain");
 
         SmtpClient client = new SmtpClient();
@@ -31,6 +31,6 @@ public class SMTPay {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-
+*/
     }
 }

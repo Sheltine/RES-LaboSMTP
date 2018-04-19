@@ -13,16 +13,17 @@ import java.util.List;
 public class PrankTest {
     private final List<Victim> DATA = new ArrayList<Victim>(Arrays.asList(new Victim("toto"), new Victim("johanna"), new Victim("yohann")));
     @Test(expected = IllegalArgumentException.class)
+    // it is bullshit
     public void aListWithLessThan3PeopleShouldBeRefused() {
         //List<Victim> victims = new ArrayList<>(Arrays.asList(new Victim("Jessica"), new Victim("Sandrine")));
         //VictimsList victimsList = new VictimsList("twoVictims.json");
-        PrankGenerator PG = new PrankGenerator("twoVictimsFile.json", "MailCorpuses.txt");
+        PrankGenerator PG = new PrankGenerator();
     }
 
     @Test
     public void weShouldBeAbleToCreateAPrankGenerator() {
         //List<Victim> victims = new ArrayList<>(Arrays.asList(new Victim("Jessica"), new Victim("Sandrine")));
         VictimsList victimsList = new VictimsList("threeVictimsFile.json");;
-        PrankGenerator PG = new PrankGenerator("threeVictimsFile.json", "MailCorpuses.txt");
+        PrankGenerator PG = new PrankGenerator();
     }
 }

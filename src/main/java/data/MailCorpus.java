@@ -24,4 +24,9 @@ public class MailCorpus {
     public void setMailCorpus(String mailCorpus) {
         this.mailCorpus = mailCorpus;
     }
+
+    @Override
+    public String toString(){
+        return mailCorpus;
+    }
 }

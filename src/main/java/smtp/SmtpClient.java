@@ -1,6 +1,7 @@
 package smtp;
 
 import com.sun.media.sound.InvalidDataException;
+import data.Victim;
 import model.mail.Mail;
 import model.mail.Person;
 
@@ -69,16 +70,16 @@ public class SmtpClient implements ISmtpClient {
         }
 
         // Sending email writer
-        os.print(FROM_CMD + mail.getFrom().getEmailAdress() + "\r\n");
-        LOG.info(FROM_CMD + mail.getFrom().getEmailAdress());
+        os.print(FROM_CMD + mail.getFrom().getMail() + "\r\n");
+        LOG.info(FROM_CMD + mail.getFrom().getMail());
         os.flush();
 
         checkBadResponse(RSP_OK);
 
         // Sending email recipients one by one
-        for(Person to : mail.getTo()){
-            System.out.println(to.getEmailAdress());
-            os.print(TO_CMD + to.getEmailAdress() + "\r\n");
+        for(Victim to : mail.getTo()){
+            System.out.println(to.getMail());
+            os.print(TO_CMD + to.getMail() + "\r\n");
             os.flush();
             checkBadResponse(RSP_OK);
         }

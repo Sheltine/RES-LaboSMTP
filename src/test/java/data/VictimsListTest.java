@@ -53,7 +53,6 @@ public class VictimsListTest {
         VictimsList vl1 = new VictimsList(DATA.get(0));
         vl1.add(DATA.get(1));
         vl1.add(DATA.get(2));
-
         vl1.save();
         vl1.close();
         System.out.println( vl1.getVictims());
