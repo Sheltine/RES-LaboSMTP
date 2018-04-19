@@ -19,7 +19,6 @@ public class Main {
         SmtpClient client = new SmtpClient();
         try {
             LOG.info("Application Start");
-           // List<String> x = new ArrayList<>(Arrays.asList("xyz", "abc"));
             client.connect("localhost");
             PrankGenerator prankGen = new PrankGenerator();
             List<Mail> pranks = prankGen.generate();
@@ -29,9 +28,6 @@ public class Main {
             }
 
             client.disconnect();
-           // PrankGenerator pg = new PrankGenerator();
-          //  pg.generate();
-
 
             LOG.info("Application End");
         }catch(Exception e){
