@@ -68,7 +68,7 @@ public class VictimsList {
         List<Victim> victims = new ArrayList<>();
         victims.add(new Victim("johanna.melly@heig-vd.ch"));
         victims.add(new Victim("yohann.meyer@heig-vd.ch"));
-        victims.add(new Victim("johannamelly@gmail.com"));
+        victims.add(new Victim("yann.mahmoudi@heig-vd.ch"));
         return victims;
     }
     public List<Victim> getVictims() {
